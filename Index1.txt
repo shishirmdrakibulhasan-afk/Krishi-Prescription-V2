@@ -1,0 +1,4732 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<base target="_top">
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+কৃষি রোগ-পোকা প্রেসক্রিপশন
+</title>
+
+
+<style>
+
+/* =========================================
+   BASIC
+========================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:10px;
+  background:#edf5ee;
+  color:#17251a;
+  font-family:
+  Arial,
+  "Noto Sans Bengali",
+  sans-serif;
+}
+
+.container{
+  width:100%;
+  max-width:1150px;
+  margin:auto;
+}
+
+.hidden{
+  display:none!important;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+#loading{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+  rgba(255,255,255,.96);
+
+  color:#146b31;
+
+  font-size:20px;
+
+  font-weight:bold;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.app-header{
+
+  padding:18px;
+
+  margin-bottom:12px;
+
+  text-align:center;
+
+  color:#fff;
+
+  background:#167338;
+
+  border-radius:14px;
+
+}
+
+.app-header h1{
+
+  margin:0;
+
+  font-size:27px;
+
+}
+
+.app-header p{
+
+  margin:6px 0 0;
+
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card{
+
+  padding:15px;
+
+  margin-bottom:13px;
+
+  background:#fff;
+
+  border:
+  1px solid #d0e0d3;
+
+  border-radius:13px;
+
+  box-shadow:
+  0 2px 8px
+  rgba(0,0,0,.06);
+
+}
+
+.card-title{
+
+  margin:
+  0 0 13px;
+
+  padding-bottom:8px;
+
+  color:#146b31;
+
+  font-size:19px;
+
+  border-bottom:
+  2px solid #208143;
+
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.grid-2{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:12px;
+
+}
+
+.grid-3{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:12px;
+
+}
+
+label{
+
+  display:block;
+
+  margin-bottom:5px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+}
+
+input,
+select,
+textarea{
+
+  width:100%;
+
+  padding:10px;
+
+  border:
+  1px solid #b7cdbd;
+
+  border-radius:8px;
+
+  background:#fff;
+
+  font-family:inherit;
+
+  font-size:15px;
+
+}
+
+textarea{
+
+  min-height:80px;
+
+  resize:vertical;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+  outline:none;
+
+  border-color:#167338;
+
+  box-shadow:
+  0 0 0 3px
+  rgba(22,115,56,.12);
+
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.button-row{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+}
+
+button{
+
+  padding:10px 17px;
+
+  border:0;
+
+  border-radius:8px;
+
+  font-family:inherit;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+.btn-green{
+
+  color:#fff;
+
+  background:#167338;
+
+}
+
+.btn-blue{
+
+  color:#fff;
+
+  background:#175da8;
+
+}
+
+.btn-red{
+
+  color:#fff;
+
+  background:#b52d2d;
+
+}
+
+.btn-gray{
+
+  color:#174b27;
+
+  background:#e5ece6;
+
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile-summary{
+
+  padding:10px;
+
+  margin-top:10px;
+
+  line-height:1.7;
+
+  background:#eef7f0;
+
+  border:
+  1px solid #bad4c0;
+
+  border-radius:8px;
+
+}
+
+
+/* =========================================
+   PROBLEM
+========================================= */
+
+.problem-box,
+.nutrient-box{
+
+  padding:13px;
+
+  margin-top:12px;
+
+  background:#fbfefb;
+
+  border:
+  1px solid #b9d1bf;
+
+  border-radius:11px;
+
+}
+
+.box-header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+}
+
+.box-header h3{
+
+  margin:0;
+
+  color:#146b31;
+
+}
+
+
+/* =========================================
+   IMAGE INFO
+========================================= */
+
+.info-box{
+
+  display:grid;
+
+  grid-template-columns:
+  160px 1fr;
+
+  gap:12px;
+
+  padding:10px;
+
+  margin-top:10px;
+
+  background:#f0f7f2;
+
+  border-radius:9px;
+
+}
+
+.info-image{
+
+  width:100%;
+
+  height:120px;
+
+  object-fit:cover;
+
+  border:
+  1px solid #bfd4c4;
+
+  border-radius:8px;
+
+}
+
+.info-text{
+
+  line-height:1.7;
+
+  font-size:14px;
+
+}
+
+
+/* =========================================
+   TREATMENT
+========================================= */
+
+.treatment{
+
+  padding:10px;
+
+  margin-top:10px;
+
+  border:
+  1px dashed #98b99f;
+
+  border-radius:8px;
+
+}
+
+
+/* =========================================
+   MANAGEMENT
+========================================= */
+
+.management-title{
+
+  margin-top:11px;
+
+  color:#155e2d;
+
+  font-weight:bold;
+
+}
+
+.management-item{
+
+  display:flex;
+
+  gap:8px;
+
+  padding:8px;
+
+  margin-top:6px;
+
+  background:#f0f7f2;
+
+  border-radius:7px;
+
+}
+
+.management-item input{
+
+  width:18px;
+
+  height:18px;
+
+  margin-top:2px;
+
+}
+
+
+/* =========================================
+   NOTICE
+========================================= */
+
+.notice{
+
+  padding:11px;
+
+  margin-top:12px;
+
+  background:#fff7d8;
+
+  border:
+  1px solid #ead78c;
+
+  border-radius:8px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message{
+
+  padding:10px;
+
+  margin-top:10px;
+
+  border-radius:8px;
+
+  font-weight:bold;
+
+}
+
+.error{
+
+  color:#9b2020;
+
+  background:#fde2e2;
+
+}
+
+.success{
+
+  color:#155e2d;
+
+  background:#ddf2e2;
+
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+#printArea{
+
+  display:none;
+
+}
+
+
+@media print{
+
+  @page{
+
+    size:A4 portrait;
+
+    margin:8mm;
+
+  }
+
+  body{
+
+    padding:0;
+
+    margin:0;
+
+    background:#fff;
+
+  }
+
+  .container,
+  #loading{
+
+    display:none!important;
+
+  }
+
+  #printArea{
+
+    display:block!important;
+
+    width:100%;
+
+  }
+
+  .prescription{
+
+    width:100%;
+
+    color:#000;
+
+    font-family:
+    Arial,
+    "Noto Sans Bengali",
+    sans-serif;
+
+  }
+
+  .pres-header{
+
+    position:relative;
+
+    min-height:72px;
+
+    padding:
+    0 80px 8px;
+
+    text-align:center;
+
+    border-bottom:
+    2px solid #146b31;
+
+  }
+
+  .pres-logo{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:68px;
+
+    height:68px;
+
+    object-fit:contain;
+
+  }
+
+  .pres-header h1{
+
+    margin:0;
+
+    font-size:21px;
+
+  }
+
+  .pres-header h2{
+
+    margin:4px 0;
+
+    font-size:14px;
+
+  }
+
+  .profile-line{
+
+    margin:2px;
+
+    font-size:10.5px;
+
+  }
+
+  .pres-title{
+
+    padding:5px;
+
+    margin:9px 0;
+
+    text-align:center;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    border:
+    1px solid #000;
+
+  }
+
+  .farmer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:4px 15px;
+
+    font-size:10px;
+
+  }
+
+  .section-title{
+
+    padding:4px 7px;
+
+    margin-top:8px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    background:#edf3ee;
+
+    border-left:
+    4px solid #167338;
+
+  }
+
+  .pres-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:8px;
+
+  }
+
+  .pres-table th,
+  .pres-table td{
+
+    padding:3px;
+
+    border:
+    1px solid #333;
+
+    vertical-align:top;
+
+  }
+
+  .pres-table th{
+
+    background:#eef3ef;
+
+  }
+
+  .print-note{
+
+    padding:5px;
+
+    margin-top:7px;
+
+    border:
+    1px solid #777;
+
+    font-size:9px;
+
+  }
+
+  .signature-area{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:12px;
+
+  }
+
+  .signature-box{
+
+    width:220px;
+
+    text-align:center;
+
+    font-size:10px;
+
+  }
+
+  .signature-image{
+
+    max-width:145px;
+
+    max-height:42px;
+
+    object-fit:contain;
+
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:750px){
+
+  body{
+
+    padding:6px;
+
+  }
+
+  .app-header h1{
+
+    font-size:21px;
+
+  }
+
+  .grid-2,
+  .grid-3{
+
+    grid-template-columns:
+    1fr;
+
+  }
+
+  .info-box{
+
+    grid-template-columns:
+    1fr;
+
+  }
+
+  .info-image{
+
+    max-width:240px;
+
+  }
+
+  .button-row button{
+
+    width:100%;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="loading">
+
+⏳ তথ্য লোড হচ্ছে...
+
+</div>
+
+
+<div class="container">
+
+
+<!-- APP HEADER -->
+
+<div class="app-header">
+
+<h1>
+
+🌾 কৃষি রোগ-পোকা প্রেসক্রিপশন
+
+</h1>
+
+<p>
+
+রোগ-পোকা ও পুষ্টি ব্যবস্থাপনা
+ভিত্তিক ডিজিটাল প্রেসক্রিপশন
+
+</p>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+👤 প্রেসক্রিপশন দাতার প্রোফাইল
+
+</h2>
+
+
+<div class="grid-2">
+
+
+<div>
+
+<label>
+
+নাম
+
+</label>
+
+<input
+id="profileName"
+placeholder="নাম লিখুন">
+
+</div>
+
+
+<div>
+
+<label>
+
+পদবি
+
+</label>
+
+<input
+id="profileDesignation"
+placeholder="পদবি লিখুন">
+
+</div>
+
+
+<div>
+
+<label>
+
+প্রতিষ্ঠান
+
+</label>
+
+<input
+id="profileOrganization"
+placeholder="প্রতিষ্ঠানের নাম">
+
+</div>
+
+
+<div>
+
+<label>
+
+ঠিকানা
+
+</label>
+
+<input
+id="profileAddress"
+placeholder="কর্মস্থল/ঠিকানা">
+
+</div>
+
+
+<div>
+
+<label>
+
+মোবাইল
+
+</label>
+
+<input
+id="profileMobile"
+placeholder="মোবাইল নম্বর">
+
+</div>
+
+
+<div>
+
+<label>
+
+ইমেইল
+
+</label>
+
+<input
+id="profileEmail"
+placeholder="ইমেইল">
+
+</div>
+
+
+<div>
+
+<label>
+
+স্বাক্ষর Upload
+
+</label>
+
+<input
+id="signatureFile"
+type="file"
+accept="image/*">
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<div class="button-row">
+
+
+<button
+class="btn-green"
+onclick="saveProfile()">
+
+💾 Profile Save
+
+</button>
+
+
+<button
+class="btn-gray"
+onclick="clearProfile()">
+
+🗑️ Profile মুছুন
+
+</button>
+
+
+</div>
+
+
+<div
+id="profileSummary"
+class="profile-summary">
+
+Profile এখনো Save করা হয়নি।
+
+</div>
+
+
+</div>
+
+
+<!-- FARMER -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+কৃষক ও ফসলের তথ্য
+
+</h2>
+
+
+<div class="grid-3">
+
+
+<div>
+
+<label>
+
+কৃষকের নাম
+
+</label>
+
+<input
+id="farmerName"
+placeholder="কৃষকের নাম">
+
+</div>
+
+
+<div>
+
+<label>
+
+মোবাইল
+
+</label>
+
+<input
+id="farmerMobile"
+placeholder="মোবাইল নম্বর">
+
+</div>
+
+
+<div>
+
+<label>
+
+ঠিকানা
+
+</label>
+
+<input
+id="farmerAddress"
+placeholder="ঠিকানা">
+
+</div>
+
+
+<div>
+
+<label>
+
+ফসল
+
+</label>
+
+<select id="cropSelect">
+
+<option value="">
+
+-- ফসল নির্বাচন করুন --
+
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+
+জাতের নাম
+
+</label>
+
+<input
+id="varietyName"
+placeholder="জাতের নাম লিখুন">
+
+</div>
+
+
+<div>
+
+<label>
+
+জমির পরিমাণ
+
+</label>
+
+<input
+id="landAmount"
+placeholder="যেমন: ২০ শতক">
+
+</div>
+
+
+<div>
+
+<label>
+
+তারিখ
+
+</label>
+
+<input
+id="prescriptionDate"
+type="date">
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<div class="grid-2">
+
+
+<div>
+
+<label>
+
+পূর্বে কী ব্যবস্থাপনা করেছেন
+
+</label>
+
+<textarea
+id="previousManagement"
+placeholder=
+"কৃষক পূর্বে কী কী ব্যবস্থা নিয়েছেন লিখুন">
+</textarea>
+
+</div>
+
+
+<div>
+
+<label>
+
+সার ব্যবহারের তথ্য
+
+</label>
+
+<textarea
+id="fertilizerUse"
+placeholder=
+"কোন সার, কত ডোজ, কখন ব্যবহার করেছেন লিখুন">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- PROBLEM -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+রোগ/পোকা নির্বাচন
+
+</h2>
+
+
+<button
+class="btn-green"
+onclick="addProblem()">
+
+＋ রোগ/পোকা যোগ করুন
+
+</button>
+
+
+<div id="problemContainer">
+
+</div>
+
+
+</div>
+
+
+<!-- NUTRIENT -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+পুষ্টি সমস্যা
+
+</h2>
+
+
+<button
+class="btn-green"
+onclick="addNutrient()">
+
+＋ পুষ্টি সমস্যা যোগ করুন
+
+</button>
+
+
+<div id="nutrientContainer">
+
+</div>
+
+
+</div>
+
+
+<!-- GENERAL -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+অন্যান্য পরামর্শ/ব্যবস্থাপনা
+
+</h2>
+
+
+<textarea
+id="generalManagement"
+placeholder=
+"প্রয়োজনে অন্যান্য পরামর্শ লিখুন">
+</textarea>
+
+
+</div>
+
+
+<!-- PRINT -->
+
+<div class="card">
+
+
+<div class="button-row">
+
+
+<button
+class="btn-blue"
+onclick="printPrescription()">
+
+🖨️ Print / PDF Download
+
+</button>
+
+
+<button
+class="btn-gray"
+onclick="clearPrescription()">
+
+🔄 নতুন প্রেসক্রিপশন
+
+</button>
+
+
+</div>
+
+
+<div class="notice">
+
+প্রয়োগ নির্দেশনা:
+পেস্টিসাইডের বোতল/প্যাকেটের
+নির্দেশনা মেনে চলুন।
+
+</div>
+
+
+<div id="message">
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- PRINT ONLY -->
+
+<div id="printArea">
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   DATA
+========================================= */
+
+let DATA={
+
+Developer_Logo:'',
+
+Crop_Master:[],
+
+Problems:[],
+
+Crop_Problem:[],
+
+Active_Ingredients:[],
+
+Problem_AI:[],
+
+Commercial_Brands:[],
+
+Management:[],
+
+Nutrient_Problems:[]
+
+};
+
+
+let problemCount=0;
+
+let nutrientCount=0;
+
+
+/* =========================================
+   START
+========================================= */
+
+window.onload=function(){
+
+
+document
+.getElementById(
+'prescriptionDate'
+)
+.value=
+
+new Date()
+.toISOString()
+.slice(0,10);
+
+
+loadSavedProfile();
+
+
+google.script.run
+
+.withSuccessHandler(
+
+function(result){
+
+
+DATA=result||DATA;
+
+
+loadCrops();
+
+
+document
+.getElementById(
+'loading'
+)
+.classList
+.add(
+'hidden'
+);
+
+
+}
+
+)
+
+.withFailureHandler(
+
+function(error){
+
+
+document
+.getElementById(
+'loading'
+)
+.classList
+.add(
+'hidden'
+);
+
+
+showMessage(
+
+'❌ Error: '+
+
+(
+
+error.message||
+
+error
+
+),
+
+'error'
+
+);
+
+
+}
+
+)
+
+.getAppData();
+
+
+};
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+function saveProfile(){
+
+
+const profile={
+
+
+Name:
+
+document
+.getElementById(
+'profileName'
+)
+.value
+.trim(),
+
+
+Designation:
+
+document
+.getElementById(
+'profileDesignation'
+)
+.value
+.trim(),
+
+
+Organization:
+
+document
+.getElementById(
+'profileOrganization'
+)
+.value
+.trim(),
+
+
+Address:
+
+document
+.getElementById(
+'profileAddress'
+)
+.value
+.trim(),
+
+
+Mobile:
+
+document
+.getElementById(
+'profileMobile'
+)
+.value
+.trim(),
+
+
+Email:
+
+document
+.getElementById(
+'profileEmail'
+)
+.value
+.trim(),
+
+
+Signature:
+
+localStorage
+.getItem(
+'agriPrescriptionSignature'
+)
+
+||
+
+''
+
+
+};
+
+
+const file=
+
+document
+.getElementById(
+'signatureFile'
+)
+.files[0];
+
+
+if(file){
+
+
+const reader=
+
+new FileReader();
+
+
+reader.onload=
+
+function(event){
+
+
+profile.Signature=
+
+event.target.result;
+
+
+localStorage
+.setItem(
+
+'agriPrescriptionSignature',
+
+profile.Signature
+
+);
+
+
+localStorage
+.setItem(
+
+'agriPrescriptionProfile',
+
+JSON.stringify(
+profile
+)
+
+);
+
+
+showProfile(
+profile
+);
+
+
+showMessage(
+
+'✅ Profile ও Signature Save হয়েছে।',
+
+'success'
+
+);
+
+
+};
+
+
+reader.readAsDataURL(
+file
+);
+
+
+return;
+
+}
+
+
+localStorage
+.setItem(
+
+'agriPrescriptionProfile',
+
+JSON.stringify(
+profile
+)
+
+);
+
+
+showProfile(
+profile
+);
+
+
+showMessage(
+
+'✅ Profile Save হয়েছে।',
+
+'success'
+
+);
+
+
+}
+
+
+function loadSavedProfile(){
+
+
+const saved=
+
+localStorage
+.getItem(
+'agriPrescriptionProfile'
+);
+
+
+if(!saved){
+
+return;
+
+}
+
+
+try{
+
+
+const profile=
+
+JSON.parse(
+saved
+);
+
+
+document
+.getElementById(
+'profileName'
+)
+.value=
+
+profile.Name||'';
+
+
+document
+.getElementById(
+'profileDesignation'
+)
+.value=
+
+profile.Designation||'';
+
+
+document
+.getElementById(
+'profileOrganization'
+)
+.value=
+
+profile.Organization||'';
+
+
+document
+.getElementById(
+'profileAddress'
+)
+.value=
+
+profile.Address||'';
+
+
+document
+.getElementById(
+'profileMobile'
+)
+.value=
+
+profile.Mobile||'';
+
+
+document
+.getElementById(
+'profileEmail'
+)
+.value=
+
+profile.Email||'';
+
+
+showProfile(
+profile
+);
+
+
+}catch(error){
+
+
+console.log(
+error
+);
+
+
+}
+
+
+}
+
+
+function showProfile(
+profile
+){
+
+
+document
+.getElementById(
+'profileSummary'
+)
+.innerHTML=
+
+`
+
+<b>
+
+${escapeHTML(
+profile.Name
+)}
+
+</b>
+
+<br>
+
+
+${escapeHTML(
+profile.Designation
+)}
+
+<br>
+
+
+${escapeHTML(
+profile.Organization
+)}
+
+<br>
+
+
+${escapeHTML(
+profile.Address
+)}
+
+<br>
+
+
+${escapeHTML(
+profile.Mobile
+)}
+
+
+`;
+
+
+}
+
+
+function clearProfile(){
+
+
+if(
+
+!confirm(
+
+'Profile মুছে ফেলবেন?'
+
+)
+
+){
+
+return;
+
+}
+
+
+localStorage
+.removeItem(
+
+'agriPrescriptionProfile'
+
+);
+
+
+localStorage
+.removeItem(
+
+'agriPrescriptionSignature'
+
+);
+
+
+[
+
+'profileName',
+
+'profileDesignation',
+
+'profileOrganization',
+
+'profileAddress',
+
+'profileMobile',
+
+'profileEmail',
+
+'signatureFile'
+
+]
+
+.forEach(
+
+function(id){
+
+
+document
+.getElementById(
+id
+)
+.value='';
+
+
+}
+
+);
+
+
+document
+.getElementById(
+'profileSummary'
+)
+.textContent=
+
+'Profile এখনো Save করা হয়নি।';
+
+
+}
+
+
+/* =========================================
+   CROP
+========================================= */
+
+function loadCrops(){
+
+
+const select=
+
+document
+.getElementById(
+'cropSelect'
+);
+
+
+DATA.Crop_Master
+
+.forEach(
+
+function(crop){
+
+
+const option=
+
+document
+.createElement(
+'option'
+);
+
+
+option.value=
+
+crop.Crop_ID;
+
+
+option.textContent=
+
+crop.Crop_Name;
+
+
+select.appendChild(
+option
+);
+
+
+}
+
+);
+
+
+select.onchange=
+
+function(){
+
+
+document
+
+.querySelectorAll(
+'.problem-select'
+)
+
+.forEach(
+
+function(select){
+
+
+fillProblemSelect(
+select
+);
+
+
+}
+
+);
+
+
+};
+
+
+}
+
+
+/* =========================================
+   PROBLEM LIST
+========================================= */
+
+function getCropProblems(){
+
+
+const cropID=
+
+document
+.getElementById(
+'cropSelect'
+)
+.value;
+
+
+const ids=
+
+DATA.Crop_Problem
+
+.filter(
+
+function(link){
+
+
+return(
+
+link.Crop_ID===
+
+cropID
+
+);
+
+
+}
+
+)
+
+.map(
+
+function(link){
+
+
+return(
+
+link.Problem_ID
+
+);
+
+
+}
+
+);
+
+
+return DATA.Problems
+
+.filter(
+
+function(problem){
+
+
+return(
+
+ids.includes(
+
+problem.Problem_ID
+
+)
+
+);
+
+
+}
+
+);
+
+
+}
+
+
+/* =========================================
+   ADD PROBLEM
+========================================= */
+
+function addProblem(){
+
+
+if(
+
+!document
+.getElementById(
+'cropSelect'
+)
+.value
+
+){
+
+
+alert(
+
+'আগে ফসল নির্বাচন করুন।'
+
+);
+
+
+return;
+
+
+}
+
+
+problemCount++;
+
+
+const id=
+
+'problemBox'+
+
+problemCount;
+
+
+const box=
+
+document
+.createElement(
+'div'
+);
+
+
+box.id=id;
+
+
+box.className=
+
+'problem-box';
+
+
+box.innerHTML=
+
+`
+
+<div class="box-header">
+
+
+<h3>
+
+রোগ/পোকা নং
+${problemCount}
+
+</h3>
+
+
+<button
+class="btn-red"
+onclick=
+"removeBox('${id}')">
+
+✖ বাদ দিন
+
+</button>
+
+
+</div>
+
+
+<div class="grid-3">
+
+
+<div>
+
+
+<label>
+
+রোগ/পোকা
+
+</label>
+
+
+<select
+class="problem-select"
+onchange=
+"problemChanged('${id}')">
+
+</select>
+
+
+</div>
+
+
+<div>
+
+
+<label>
+
+Active Ingredient
+
+</label>
+
+
+<select
+class="ai-select"
+onchange=
+"aiChanged('${id}')">
+
+
+<option value="">
+
+-- নির্বাচন করুন --
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+<div>
+
+
+<label>
+
+বাণিজ্যিক নাম
+
+</label>
+
+
+<select
+class="brand-select"
+onchange=
+"brandChanged('${id}')">
+
+
+<option value="">
+
+-- নির্বাচন করুন --
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+</div>
+
+
+<div
+class=
+"info-box hidden">
+
+
+<img
+class=
+"info-image">
+
+
+<div
+class=
+"info-text">
+
+
+<b>
+
+কারণ:
+
+</b>
+
+
+<span
+class=
+"cause">
+
+</span>
+
+
+<br>
+
+
+<b>
+
+লক্ষণ/ক্ষতি:
+
+</b>
+
+
+<span
+class=
+"symptoms">
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+<div
+class=
+"treatment">
+
+
+<div
+class=
+"grid-3">
+
+
+<div>
+
+
+<label>
+
+Formulation
+
+label>
+
+
+<input
+class=
+"formulation"
+readonly>
+
+
+</div>
+
+
+<div>
+
+
+<label>
+
+ডোজ
+
+</label>
+
+
+<input
+class=
+"dose"
+readonly>
+
+
+</div>
+
+
+<div>
+
+
+<label>
+
+প্রয়োগ নির্দেশনা
+
+</label>
+
+
+<input
+class=
+"instruction"
+readonly>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<div
+class=
+"management-list">
+
+</div>
+
+`;
+
+
+document
+.getElementById(
+'problemContainer'
+)
+.appendChild(
+box
+);
+
+
+fillProblemSelect(
+
+box.querySelector(
+'.problem-select'
+)
+
+);
+
+
+}
+
+
+function fillProblemSelect(
+select
+){
+
+
+select.innerHTML=
+
+`
+
+<option value="">
+
+-- রোগ/পোকা নির্বাচন করুন --
+
+</option>
+
+`;
+
+
+getCropProblems()
+
+.forEach(
+
+function(problem){
+
+
+const option=
+
+document
+.createElement(
+'option'
+);
+
+
+option.value=
+
+problem.Problem_ID;
+
+
+option.textContent=
+
+problem.Problem_Type+
+
+' - '+
+
+problem.Problem_Name;
+
+
+select.appendChild(
+option
+);
+
+
+}
+
+);
+
+
+}
+
+
+/* =========================================
+   PROBLEM CHANGE
+========================================= */
+
+function problemChanged(
+boxID
+){
+
+
+const box=
+
+document
+.getElementById(
+boxID
+);
+
+
+const problemID=
+
+box
+.querySelector(
+'.problem-select'
+)
+.value;
+
+
+const problem=
+
+DATA.Problems
+
+.find(
+
+function(item){
+
+
+return(
+
+item.Problem_ID===
+
+problemID
+
+);
+
+
+}
+
+);
+
+
+const info=
+
+box.querySelector(
+'.info-box'
+);
+
+
+if(!problem){
+
+
+info.classList.add(
+'hidden'
+);
+
+
+return;
+
+
+}
+
+
+info.classList.remove(
+'hidden'
+);
+
+
+const image=
+
+box.querySelector(
+'.info-image'
+);
+
+
+image.style.display=
+'block';
+
+
+image.src=
+
+problem.Image_URL||'';
+
+
+image.onerror=
+
+function(){
+
+
+this.style.display=
+'none';
+
+
+};
+
+
+box
+.querySelector(
+'.cause'
+)
+.textContent=
+
+problem.Cause_Type||'';
+
+
+box
+.querySelector(
+'.symptoms'
+)
+.textContent=
+
+problem.Symptoms_Damage||'';
+
+
+const aiSelect=
+
+box.querySelector(
+'.ai-select'
+);
+
+
+aiSelect.innerHTML=
+
+`
+
+<option value="">
+
+-- Active Ingredient নির্বাচন করুন --
+
+</option>
+
+`;
+
+
+DATA.Problem_AI
+
+.filter(
+
+function(link){
+
+
+return(
+
+link.Problem_ID===
+
+problemID
+
+);
+
+
+}
+
+)
+
+.forEach(
+
+function(link){
+
+
+const ai=
+
+DATA.Active_Ingredients
+
+.find(
+
+function(item){
+
+
+return(
+
+item.AI_ID===
+
+link.AI_ID
+
+);
+
+
+}
+
+);
+
+
+if(!ai){
+
+return;
+
+}
+
+
+const option=
+
+document
+.createElement(
+'option'
+);
+
+
+option.value=
+
+ai.AI_ID;
+
+
+option.textContent=
+
+ai.Active_Ingredient+
+
+(
+
+ai.Formulation
+
+?
+
+' ('+
+
+ai.Formulation+
+
+')'
+
+:
+
+''
+
+);
+
+
+aiSelect.appendChild(
+option
+);
+
+
+}
+
+);
+
+
+loadManagement(
+
+box,
+
+problemID
+
+);
+
+
+}
+
+
+/* =========================================
+   AI CHANGE
+========================================= */
+
+function aiChanged(
+boxID
+){
+
+
+const box=
+
+document
+.getElementById(
+boxID
+);
+
+
+const aiID=
+
+box
+.querySelector(
+'.ai-select'
+)
+.value;
+
+
+const ai=
+
+DATA.Active_Ingredients
+
+.find(
+
+function(item){
+
+
+return(
+
+item.AI_ID===
+
+aiID
+
+);
+
+
+}
+
+);
+
+
+box
+.querySelector(
+'.formulation'
+)
+.value=
+
+ai
+
+?
+
+ai.Formulation
+
+:
+
+'';
+
+
+const brandSelect=
+
+box.querySelector(
+'.brand-select'
+);
+
+
+brandSelect.innerHTML=
+
+`
+
+<option value="">
+
+-- বাণিজ্যিক নাম নির্বাচন করুন --
+
+</option>
+
+`;
+
+
+DATA.Commercial_Brands
+
+.filter(
+
+function(brand){
+
+
+return(
+
+brand.AI_ID===
+
+aiID
+
+);
+
+
+}
+
+)
+
+.forEach(
+
+function(brand){
+
+
+const option=
+
+document
+.createElement(
+'option'
+);
+
+
+option.value=
+
+brand.Brand_ID;
+
+
+option.textContent=
+
+brand.Brand_Name;
+
+
+brandSelect.appendChild(
+option
+);
+
+
+}
+
+);
+
+
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+function brandChanged(
+boxID
+){
+
+
+const box=
+
+document
+.getElementById(
+boxID
+);
+
+
+const brandID=
+
+box
+.querySelector(
+'.brand-select'
+)
+.value;
+
+
+const brand=
+
+DATA.Commercial_Brands
+
+.find(
+
+function(item){
+
+
+return(
+
+item.Brand_ID===
+
+brandID
+
+);
+
+
+}
+
+);
+
+
+if(!brand){
+
+return;
+
+}
+
+
+box
+.querySelector(
+'.dose'
+)
+.value=
+
+(
+
+brand.Dose||
+
+''
+
+)
+
++
+
+' '+
+
+(
+
+brand.Dose_Unit||
+
+''
+
+);
+
+
+box
+.querySelector(
+'.instruction'
+)
+.value=
+
+brand.Application_Instruction||
+
+'';
+
+
+}
+
+
+/* =========================================
+   MANAGEMENT
+========================================= */
+
+function loadManagement(
+
+box,
+
+problemID
+
+){
+
+
+const list=
+
+box.querySelector(
+'.management-list'
+);
+
+
+list.innerHTML='';
+
+
+const items=
+
+DATA.Management
+
+.filter(
+
+function(item){
+
+
+return(
+
+item.Problem_ID===
+
+problemID
+
+);
+
+
+}
+
+);
+
+
+if(
+
+items.length===0
+
+){
+
+return;
+
+}
+
+
+const title=
+
+document
+.createElement(
+'div'
+);
+
+
+title.className=
+
+'management-title';
+
+
+title.textContent=
+
+'অন্যান্য ব্যবস্থাপনা';
+
+
+list.appendChild(
+title
+);
+
+
+items.forEach(
+
+function(item){
+
+
+const div=
+
+document
+.createElement(
+'div'
+);
+
+
+div.className=
+
+'management-item';
+
+
+div.innerHTML=
+
+`
+
+<input
+type="checkbox"
+checked>
+
+
+<div>
+
+
+<b>
+
+${escapeHTML(
+item.Management_Type
+)}:
+
+</b>
+
+
+${escapeHTML(
+item.Management_Advice
+)}
+
+
+</div>
+
+`;
+
+
+list.appendChild(
+div
+);
+
+
+}
+
+);
+
+
+}
+
+
+/* =========================================
+   NUTRIENT
+========================================= */
+
+function addNutrient(){
+
+
+nutrientCount++;
+
+
+const id=
+
+'nutrientBox'+
+
+nutrientCount;
+
+
+const box=
+
+document
+.createElement(
+'div'
+);
+
+
+box.id=id;
+
+
+box.className=
+
+'nutrient-box';
+
+
+box.innerHTML=
+
+`
+
+<div class="box-header">
+
+
+<h3>
+
+পুষ্টি সমস্যা নং
+${nutrientCount}
+
+</h3>
+
+
+<button
+class="btn-red"
+onclick=
+"removeBox('${id}')">
+
+✖ বাদ দিন
+
+</button>
+
+
+</div>
+
+
+<div class="grid-2">
+
+
+<div>
+
+
+<label>
+
+পুষ্টি উপাদান
+
+</label>
+
+
+<select
+class=
+"nutrient-select"
+onchange=
+"nutrientChanged('${id}')">
+
+
+<option value="">
+
+-- নির্বাচন করুন --
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+<div>
+
+
+<label>
+
+সমাধান/পরামর্শ
+
+</label>
+
+
+<textarea
+class=
+"nutrient-solution"
+placeholder=
+"সমাধান লিখুন">
+</textarea>
+
+
+</div>
+
+
+</div>
+
+
+<div
+class=
+"info-box hidden">
+
+
+<img
+class=
+"info-image">
+
+
+<div
+class=
+"info-text">
+
+
+<b>
+
+পুষ্টি সমস্যা:
+
+</b>
+
+
+<span
+class=
+"nutrient-problem">
+
+</span>
+
+
+<br>
+
+
+<b>
+
+লক্ষণ:
+
+</b>
+
+
+<span
+class=
+"nutrient-symptoms">
+
+</span>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
+document
+.getElementById(
+'nutrientContainer'
+)
+.appendChild(
+box
+);
+
+
+const select=
+
+box.querySelector(
+'.nutrient-select'
+);
+
+
+DATA.Nutrient_Problems
+
+.forEach(
+
+function(item){
+
+
+const option=
+
+document
+.createElement(
+'option'
+);
+
+
+option.value=
+
+item.Nutrient_ID;
+
+
+option.textContent=
+
+item.Nutrient_Name;
+
+
+select.appendChild(
+option
+);
+
+
+}
+
+);
+
+
+}
+
+
+function nutrientChanged(
+boxID
+){
+
+
+const box=
+
+document
+.getElementById(
+boxID
+);
+
+
+const nutrientID=
+
+box
+.querySelector(
+'.nutrient-select'
+)
+.value;
+
+
+const nutrient=
+
+DATA.Nutrient_Problems
+
+.find(
+
+function(item){
+
+
+return(
+
+item.Nutrient_ID===
+
+nutrientID
+
+);
+
+
+}
+
+);
+
+
+const info=
+
+box.querySelector(
+'.info-box'
+);
+
+
+if(!nutrient){
+
+
+info.classList.add(
+'hidden'
+);
+
+
+return;
+
+
+}
+
+
+info.classList.remove(
+'hidden'
+);
+
+
+const image=
+
+box.querySelector(
+'.info-image'
+);
+
+
+image.style.display=
+'block';
+
+
+image.src=
+
+nutrient.Image_URL||'';
+
+
+image.onerror=
+
+function(){
+
+
+this.style.display=
+'none';
+
+
+};
+
+
+box
+.querySelector(
+'.nutrient-problem'
+)
+.textContent=
+
+nutrient.Problem_Name||'';
+
+
+box
+.querySelector(
+'.nutrient-symptoms'
+)
+.textContent=
+
+nutrient.Symptoms||'';
+
+
+}
+
+
+/* =========================================
+   REMOVE
+========================================= */
+
+function removeBox(
+id
+){
+
+
+const box=
+
+document
+.getElementById(
+id
+);
+
+
+if(box){
+
+box.remove();
+
+}
+
+
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+function printPrescription(){
+
+
+const saved=
+
+localStorage
+.getItem(
+'agriPrescriptionProfile'
+);
+
+
+if(!saved){
+
+
+alert(
+
+'আগে প্রেসক্রিপশন দাতার Profile Save করুন।'
+
+);
+
+
+return;
+
+
+}
+
+
+const profile=
+
+JSON.parse(
+saved
+);
+
+
+const cropID=
+
+document
+.getElementById(
+'cropSelect'
+)
+.value;
+
+
+if(!cropID){
+
+
+alert(
+
+'ফসল নির্বাচন করুন।'
+
+);
+
+
+return;
+
+
+}
+
+
+const crop=
+
+DATA.Crop_Master
+
+.find(
+
+function(item){
+
+
+return(
+
+item.Crop_ID===
+
+cropID
+
+);
+
+
+}
+
+);
+
+
+let problemRows='';
+
+
+document
+
+.querySelectorAll(
+'.problem-box'
+)
+
+.forEach(
+
+function(
+
+box,
+
+index
+
+){
+
+
+const problemID=
+
+box
+.querySelector(
+'.problem-select'
+)
+.value;
+
+
+if(!problemID){
+
+return;
+
+}
+
+
+const problem=
+
+DATA.Problems
+
+.find(
+
+item=>
+
+item.Problem_ID===
+
+problemID
+
+);
+
+
+const aiID=
+
+box
+.querySelector(
+'.ai-select'
+)
+.value;
+
+
+const ai=
+
+DATA.Active_Ingredients
+
+.find(
+
+item=>
+
+item.AI_ID===
+
+aiID
+
+);
+
+
+const brandID=
+
+box
+.querySelector(
+'.brand-select'
+)
+.value;
+
+
+const brand=
+
+DATA.Commercial_Brands
+
+.find(
+
+item=>
+
+item.Brand_ID===
+
+brandID
+
+);
+
+
+const management=
+
+Array
+
+.from(
+
+box.querySelectorAll(
+'.management-item'
+)
+
+)
+
+.filter(
+
+item=>
+
+item.querySelector(
+'input'
+).checked
+
+)
+
+.map(
+
+item=>
+
+escapeHTML(
+item.innerText
+)
+
+)
+
+.join(
+'<br>'
+);
+
+
+problemRows+=
+
+`
+
+<tr>
+
+
+<td>
+
+${index+1}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+problem
+
+?
+
+problem.Problem_Name
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+ai
+
+?
+
+ai.Active_Ingredient
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+ai
+
+?
+
+ai.Formulation
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+brand
+
+?
+
+brand.Brand_Name
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+brand
+
+?
+
+(
+
+brand.Dose+
+
+' '+
+
+brand.Dose_Unit
+
+)
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+brand
+
+?
+
+brand.Application_Instruction
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${management}
+
+</td>
+
+
+</tr>
+
+`;
+
+
+}
+
+);
+
+
+let nutrientRows='';
+
+
+document
+
+.querySelectorAll(
+'.nutrient-box'
+)
+
+.forEach(
+
+function(
+
+box,
+
+index
+
+){
+
+
+const nutrientID=
+
+box
+.querySelector(
+'.nutrient-select'
+)
+.value;
+
+
+if(!nutrientID){
+
+return;
+
+}
+
+
+const nutrient=
+
+DATA.Nutrient_Problems
+
+.find(
+
+item=>
+
+item.Nutrient_ID===
+
+nutrientID
+
+);
+
+
+const solution=
+
+box
+.querySelector(
+'.nutrient-solution'
+)
+.value;
+
+
+nutrientRows+=
+
+`
+
+<tr>
+
+
+<td>
+
+${index+1}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+nutrient
+
+?
+
+nutrient.Nutrient_Name
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+nutrient
+
+?
+
+nutrient.Problem_Name
+
+:
+
+''
+
+)}
+
+</td>
+
+
+<td>
+
+${escapeHTML(
+
+solution
+
+)}
+
+</td>
+
+
+</tr>
+
+`;
+
+
+}
+
+);
+
+
+document
+.getElementById(
+'printArea'
+)
+.innerHTML=
+
+`
+
+<div class=
+"prescription">
+
+
+<div class=
+"pres-header">
+
+
+<img
+class=
+"pres-logo"
+src=
+"${escapeHTML(
+DATA.Developer_Logo
+)}">
+
+
+<h1>
+
+🌾 কৃষি রোগ-পোকা প্রেসক্রিপশন
+
+</h1>
+
+
+<h2>
+
+রোগ-পোকা ও পুষ্টি ব্যবস্থাপনা
+
+</h2>
+
+
+<div class=
+"profile-line">
+
+<b>
+
+${escapeHTML(
+profile.Name
+)}
+
+</b>
+
+</div>
+
+
+<div class=
+"profile-line">
+
+${escapeHTML(
+profile.Designation
+)}
+
+</div>
+
+
+<div class=
+"profile-line">
+
+${escapeHTML(
+profile.Organization
+)}
+
+</div>
+
+
+<div class=
+"profile-line">
+
+${escapeHTML(
+profile.Address
+)}
+
+</div>
+
+
+<div class=
+"profile-line">
+
+${escapeHTML(
+profile.Mobile
+)}
+
+</div>
+
+
+</div>
+
+
+<div class=
+"pres-title">
+
+কৃষি পরামর্শ
+ও ব্যবস্থাপনা প্রেসক্রিপশন
+
+</div>
+
+
+<div class=
+"farmer-grid">
+
+
+<div>
+
+<b>
+
+কৃষকের নাম:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'farmerName'
+)
+.value
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+মোবাইল:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'farmerMobile'
+)
+.value
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+ফসল:
+
+</b>
+
+
+${escapeHTML(
+
+crop
+
+?
+
+crop.Crop_Name
+
+:
+
+''
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+জাত:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'varietyName'
+)
+.value
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+জমির পরিমাণ:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'landAmount'
+)
+.value
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+তারিখ:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'prescriptionDate'
+)
+.value
+
+)}
+
+</div>
+
+
+<div>
+
+<b>
+
+ঠিকানা:
+
+</b>
+
+
+${escapeHTML(
+
+document
+.getElementById(
+'farmerAddress'
+)
+.value
+
+)}
+
+</div>
+
+
+</div>
+
+
+<div class=
+"section-title">
+
+পূর্বের ব্যবস্থাপনা
+
+</div>
+
+
+<div>
+
+${escapeHTML(
+
+document
+.getElementById(
+'previousManagement'
+)
+.value
+
+)}
+
+</div>
+
+
+<div class=
+"section-title">
+
+সার ব্যবহারের তথ্য
+
+</div>
+
+
+<div>
+
+${escapeHTML(
+
+document
+.getElementById(
+'fertilizerUse'
+)
+.value
+
+)}
+
+</div>
+
+
+${
+
+problemRows
+
+?
+
+`
+
+<div class=
+"section-title">
+
+রোগ/পোকা ও ব্যবস্থাপনা
+
+</div>
+
+
+<table class=
+"pres-table">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+নং
+</th>
+
+
+<th>
+সমস্যা
+</th>
+
+
+<th>
+Active Ingredient
+</th>
+
+
+<th>
+Formulation
+</th>
+
+
+<th>
+বাণিজ্যিক নাম
+</th>
+
+
+<th>
+ডোজ
+</th>
+
+
+<th>
+প্রয়োগ নির্দেশনা
+</th>
+
+
+<th>
+অন্যান্য ব্যবস্থাপনা
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+<tbody>
+
+
+${problemRows}
+
+
+</tbody>
+
+
+</table>
+
+`
+
+:
+
+''
+
+}
+
+
+${
+
+nutrientRows
+
+?
+
+`
+
+<div class=
+"section-title">
+
+পুষ্টি ব্যবস্থাপনা
+
+</div>
+
+
+<table class=
+"pres-table">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+নং
+</th>
+
+
+<th>
+পুষ্টি উপাদান
+</th>
+
+
+<th>
+সমস্যা
+</th>
+
+
+<th>
+সমাধান
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+<tbody>
+
+
+${nutrientRows}
+
+
+</tbody>
+
+
+</table>
+
+`
+
+:
+
+''
+
+}
+
+
+<div class=
+"section-title">
+
+অন্যান্য পরামর্শ
+
+</div>
+
+
+<div>
+
+${escapeHTML(
+
+document
+.getElementById(
+'generalManagement'
+)
+.value
+
+)}
+
+</div>
+
+
+<div class=
+"print-note">
+
+
+<b>
+
+প্রয়োগ নির্দেশনা:
+
+</b>
+
+
+পেস্টিসাইডের
+বোতল/প্যাকেটের
+নির্দেশনা মেনে চলুন।
+
+
+</div>
+
+
+<div class=
+"signature-area">
+
+
+<div class=
+"signature-box">
+
+
+${
+
+profile.Signature
+
+?
+
+`
+
+<img
+class=
+"signature-image"
+src=
+"${profile.Signature}">
+
+`
+
+:
+
+'<br><br>'
+
+}
+
+
+<div>
+
+____________________
+
+</div>
+
+
+<b>
+
+${escapeHTML(
+profile.Name
+)}
+
+</b>
+
+
+<br>
+
+
+${escapeHTML(
+profile.Designation
+)}
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
+setTimeout(
+
+function(){
+
+
+window.print();
+
+
+},
+
+700
+
+);
+
+
+}
+
+
+/* =========================================
+   CLEAR
+========================================= */
+
+function clearPrescription(){
+
+
+if(
+
+!confirm(
+
+'নতুন প্রেসক্রিপশন শুরু করবেন?'
+
+)
+
+){
+
+return;
+
+}
+
+
+[
+
+'farmerName',
+
+'farmerMobile',
+
+'farmerAddress',
+
+'varietyName',
+
+'landAmount',
+
+'previousManagement',
+
+'fertilizerUse',
+
+'generalManagement'
+
+]
+
+.forEach(
+
+function(id){
+
+
+document
+.getElementById(
+id
+)
+.value='';
+
+
+}
+
+);
+
+
+document
+.getElementById(
+'cropSelect'
+)
+.value='';
+
+
+document
+.getElementById(
+'problemContainer'
+)
+.innerHTML='';
+
+
+document
+.getElementById(
+'nutrientContainer'
+)
+.innerHTML='';
+
+
+problemCount=0;
+
+nutrientCount=0;
+
+
+showMessage(
+
+'✅ নতুন প্রেসক্রিপশন তৈরি করুন।',
+
+'success'
+
+);
+
+
+}
+
+
+/* =========================================
+   ESCAPE
+========================================= */
+
+function escapeHTML(
+value
+){
+
+
+return String(
+
+value||
+
+''
+
+)
+
+.replace(
+
+/&/g,
+
+'&amp;'
+
+)
+
+.replace(
+
+/</g,
+
+'&lt;'
+
+)
+
+.replace(
+
+/>/g,
+
+'&gt;'
+
+)
+
+.replace(
+
+/"/g,
+
+'&quot;'
+
+);
+
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(
+
+text,
+
+type
+
+){
+
+
+const message=
+
+document
+.getElementById(
+'message'
+);
+
+
+message.className=
+
+'message '+
+
+type;
+
+
+message.textContent=
+
+text;
+
+
+}
+
+
+</script>
+
+</body>
+</html>

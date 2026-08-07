@@ -1,0 +1,548 @@
+/********************************************************
+ 🌾 কৃষি রোগ-পোকা প্রেসক্রিপশন
+ FINAL Code.gs
+
+ Master Sheet Tabs:
+ 1. Crop_Master
+ 2. Problems
+ 3. Crop_Problem
+ 4. Active_Ingredients
+ 5. Problem_AI
+ 6. Commercial_Brands
+ 7. Management
+ 8. Nutrient_Problems
+
+ Prescription Data কোনো Sheet-এ Save হবে না।
+********************************************************/
+
+
+/* =====================================================
+   DEVELOPER LOGO
+===================================================== */
+
+const DEVELOPER_LOGO_URL =
+'https://drive.google.com/file/d/1pf6GNVM7cFi4I7s2CQVBu4NKlcfQFtx0/view?usp=sharing';
+
+
+/* =====================================================
+   WEB APP + REST API
+===================================================== */
+
+function doGet(e) {
+
+  const action = (e && e.parameter && e.parameter.action) || "";
+
+  // Android / REST API
+  if (action === "getAppData") {
+
+    return ContentService
+      .createTextOutput(
+        JSON.stringify({
+          success: true,
+          message: "OK",
+          data: getAppData()
+        })
+      )
+      .setMimeType(ContentService.MimeType.JSON);
+
+  }
+
+  // Existing HTML Web App
+  return HtmlService
+    .createHtmlOutputFromFile('Index')
+    .setTitle('কৃষি রোগ-পোকা প্রেসক্রিপশন')
+    .setXFrameOptionsMode(
+      HtmlService.XFrameOptionsMode.ALLOWALL
+    );
+
+}
+
+
+/* =====================================================
+   GET ALL MASTER DATA
+===================================================== */
+
+function getAppData() {
+
+  const ss =
+    SpreadsheetApp
+    .getActiveSpreadsheet();
+
+
+  const crops =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Crop_Master'
+      )
+    );
+
+
+  const problems =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Problems'
+      )
+    );
+
+
+  const cropProblems =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Crop_Problem'
+      )
+    );
+
+
+  const activeIngredients =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Active_Ingredients'
+      )
+    );
+
+
+  const problemAI =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Problem_AI'
+      )
+    );
+
+
+  const commercialBrands =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Commercial_Brands'
+      )
+    );
+
+
+  const management =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Management'
+      )
+    );
+
+
+  const nutrientProblems =
+    getActiveRows_(
+      getSheetRows_(
+        ss,
+        'Nutrient_Problems'
+      )
+    );
+
+
+  /* Drive Image URL Convert */
+
+  problems.forEach(
+
+    function(row) {
+
+      row.Image_URL =
+        convertDriveImage_(
+          row.Image_URL
+        );
+
+    }
+
+  );
+
+
+  nutrientProblems.forEach(
+
+    function(row) {
+
+      row.Image_URL =
+        convertDriveImage_(
+          row.Image_URL
+        );
+
+    }
+
+  );
+
+
+  return {
+
+    Developer_Logo:
+
+      convertDriveImage_(
+        DEVELOPER_LOGO_URL
+      ),
+
+
+    Crop_Master:
+
+      crops,
+
+
+    Problems:
+
+      problems,
+
+
+    Crop_Problem:
+
+      cropProblems,
+
+
+    Active_Ingredients:
+
+      activeIngredients,
+
+
+    Problem_AI:
+
+      problemAI,
+
+
+    Commercial_Brands:
+
+      commercialBrands,
+
+
+    Management:
+
+      management,
+
+
+    Nutrient_Problems:
+
+      nutrientProblems
+
+  };
+
+}
+
+
+/* =====================================================
+   READ SHEET
+===================================================== */
+
+function getSheetRows_(
+  ss,
+  sheetName
+) {
+
+  const sheet =
+
+    ss.getSheetByName(
+      sheetName
+    );
+
+
+  if (!sheet) {
+
+    throw new Error(
+
+      'Sheet পাওয়া যায়নি: ' +
+
+      sheetName
+
+    );
+
+  }
+
+
+  const lastRow =
+
+    sheet.getLastRow();
+
+
+  const lastColumn =
+
+    sheet.getLastColumn();
+
+
+  if (
+
+    lastRow < 2
+
+    ||
+
+    lastColumn < 1
+
+  ) {
+
+    return [];
+
+  }
+
+
+  const values =
+
+    sheet
+
+    .getRange(
+
+      1,
+      1,
+      lastRow,
+      lastColumn
+
+    )
+
+    .getDisplayValues();
+
+
+  const headers =
+
+    values[0]
+
+    .map(
+
+      function(header) {
+
+        return String(
+          header
+        )
+
+        .trim();
+
+      }
+
+    );
+
+
+  const output = [];
+
+
+  for (
+
+    let rowNo = 1;
+
+    rowNo < values.length;
+
+    rowNo++
+
+  ) {
+
+    const row =
+
+      values[
+        rowNo
+      ];
+
+
+    const blank =
+
+      row.every(
+
+        function(cell) {
+
+          return String(
+            cell
+          )
+
+          .trim()
+
+          === '';
+
+        }
+
+      );
+
+
+    if (blank) {
+
+      continue;
+
+    }
+
+
+    const object = {};
+
+
+    headers.forEach(
+
+      function(
+
+        header,
+
+        columnNo
+
+      ) {
+
+        if (
+
+          header === ''
+
+        ) {
+
+          return;
+
+        }
+
+
+        object[
+          header
+        ] =
+
+          String(
+
+            row[
+              columnNo
+            ]
+
+            ||
+
+            ''
+
+          )
+
+          .trim();
+
+      }
+
+    );
+
+
+    output.push(
+      object
+    );
+
+  }
+
+
+  return output;
+
+}
+
+
+/* =====================================================
+   ACTIVE STATUS
+===================================================== */
+
+function getActiveRows_(
+  rows
+) {
+
+  return rows.filter(
+
+    function(row) {
+
+      const status =
+
+        String(
+
+          row.Status
+
+          ||
+
+          ''
+
+        )
+
+        .trim()
+
+        .toLowerCase();
+
+
+      return (
+
+        status === ''
+
+        ||
+
+        status === 'active'
+
+        ||
+
+        status === 'yes'
+
+        ||
+
+        status === 'true'
+
+        ||
+
+        status === '1'
+
+        ||
+
+        status === 'চালু'
+
+      );
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   GOOGLE DRIVE IMAGE URL
+===================================================== */
+
+function convertDriveImage_(
+  url
+) {
+
+  if (!url) {
+
+    return '';
+
+  }
+
+
+  const text =
+
+    String(url)
+
+    .trim();
+
+
+  let match =
+
+    text.match(
+
+      /\/d\/([a-zA-Z0-9_-]+)/
+
+    );
+
+
+  if (!match) {
+
+    match =
+
+      text.match(
+
+        /[?&]id=([a-zA-Z0-9_-]+)/
+
+      );
+
+  }
+
+
+  if (match) {
+
+    return (
+
+      'https://drive.google.com/thumbnail?id='
+
+      +
+
+      match[1]
+
+      +
+
+      '&sz=w1000'
+
+    );
+
+  }
+
+
+  return text;
+
+}
